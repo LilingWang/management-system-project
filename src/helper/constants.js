@@ -1,0 +1,11 @@
+export const INIT = 'INIT';
+export const ADD = 'ADD';
+export const MOD = 'MOD';
+export const DEL = 'DEL';
+export const ERR = 'ERR';
+export const GETINFO = 'GETINFO';
+export const INITCART = 'INITCART';
+export const ADDTOCART = 'ADDTOCART';
+export const ADDTOCARTLIST ='ADDTOCARTLIST';
+export const MINUSTOCART ='MINUSTOCART';
+export const REMOVEITEM ='REMOVEITEM';
