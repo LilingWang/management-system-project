@@ -1,7 +1,7 @@
 import { shoppingCartApi } from "./shoppingCartAPI";
 export const ProductsApi = {
     products: [
-        { imgUrl: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png', price: '124', productName: 'apple iphone11', productDescrip: "dfrwerqwer,werqerewtfdsfs", category: "Caltegory1", item: 10, addOnitem: 0 },
+       /* { imgUrl: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png', price: '124', productName: 'apple iphone11', productDescrip: "dfrwerqwer,werqerewtfdsfs", category: "Caltegory1", item: 10, addOnitem: 0 },
         { imgUrl: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png', price: '220', productName: 'apple iphone12', productDescrip: "dfrwerqwer,werqerewtfdsfs", category: "Caltegory2", item: 10, addOnitem: 1 },
         { imgUrl: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png', price: '243', productName: 'apple iphone13', productDescrip: "dfrwerqwer,werqerewtfdsfs", category: "Caltegory3", item: 10, addOnitem: 2 },
         { imgUrl: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png', price: '294', productName: 'apple iphone11', productDescrip: "dfrwerqwer,werqerewtfdsfs", category: "Caltegory1", item: 10, addOnitem: 0 },
@@ -31,7 +31,7 @@ export const ProductsApi = {
         { imgUrl: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png', price: '294', productName: 'apple iphone11', productDescrip: "dfrwerqwer,werqerewtfdsfs", category: "Caltegory1", item: 10, addOnitem: 0 },
         { imgUrl: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png', price: '324', productName: 'apple iphone12', productDescrip: "dfrwerqwer,werqerewtfdsfs", category: "Caltegory2", item: 10, addOnitem: 1 },
         { imgUrl: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png', price: '249', productName: 'apple iphone13', productDescrip: "dfrwerqwer,werqerewtfdsfs", category: "Caltegory3", item: 10, addOnitem: 2 },
-
+*/
 
     ],
 
@@ -54,7 +54,6 @@ export const ProductsApi = {
                     return;
                 }
                 const product = this.products[index];
-                console.log("product===============",product);
                 resolve({ product: product });
 
             }, 500);
@@ -76,9 +75,6 @@ export const ProductsApi = {
     },
 
     addProductToCart: async function (index) {
-        console.log("index", index);
-        console.log(this.products[1].addOnitem)
-
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 if (!Number.isInteger(index) ||
@@ -111,7 +107,6 @@ export const ProductsApi = {
                     this.products[index].addOnitem = this.products[index].addOnitem - 1;
                 }
 
-                console.log(this.products, "'''....")
                 resolve({ products: this.products });
             }, 500);
         });

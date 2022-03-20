@@ -6,7 +6,6 @@ import './index.css';
 import { addProductToCart, minusProductToCart,removeItemFromCart } from "../../../actions/index";
 import { addProductToList } from "../../../actions/cartProducts/index"
 
-
 const DisplyCartProduct = () => {
 
     const cartProducts = useSelector((state) => state);
@@ -27,25 +26,17 @@ const DisplyCartProduct = () => {
         addProductToList(dispatch)(index);
     }
 
-    
     const [subTotal, setSubTotal] = useState(0);
 
-    const handleDiscountBtn = ()=>{
-       
+    const handleDiscountBtn = ()=>{      
         setShowDiscount(true)
-
     }
 
     const removeItemBtn = (index) =>(event) =>{
         removeItemFromCart(dispatch)(index);
         addProductToList(dispatch)(index);
-
     }
 
-    
-
-    console.log("cart products 087887", cartProducts);
-    console.log(totalPrice,"totalprice")
     const productsList = cartProducts.reducer.map((product, index) => {
         if (product.addOnitem > 0) {
             console.log(product.addOnitem,product.price)
@@ -92,23 +83,21 @@ const DisplyCartProduct = () => {
                     <Col span={18}>
                         <p>Subtotal</p>
                         <p>Tax</p>
-                        {showDiscount? (<p>Discount</p>)  : null}
-                        
+                        {showDiscount? (<p>Discount</p>)  : null}                      
                         <p>Estimated total</p>
                     </Col>
                     <Col span={6}>
                         <p>${totalPrice.toFixed(2)}</p>
                         <p>${(totalPrice * 0.1).toFixed(2)}</p>
                         {showDiscount? (<p>-20</p>)  : null}
-                       <p>${(totalPrice - 20).toFixed(2)}</p>
+                       {showDiscount? (<p> ${(totalPrice - 20).toFixed(2)}</p>)  : (<p>${totalPrice.toFixed(2)}</p>)}
+                      
                         
                     </Col>
                 </Row>
                 <Button>Continue to checkout</Button>
             </div>
-
         </div>
-
     )
 }
 

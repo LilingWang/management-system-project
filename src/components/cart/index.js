@@ -17,10 +17,7 @@ const Cart = ({
             totalItem = totalItem + item.addOnitem;
         }
     });
-    console.log(totalItem, "test cart visible")
     const cartTitle = "Cart ( " + totalItem + " )";
-   // console.log({ cartVisible }, "test cart visible")
-
 
     return (
         <div>
@@ -31,7 +28,6 @@ const Cart = ({
                 setCartVisible={setCartVisible}
             >
                 <DisplyCartProduct />
-
             </CartModal>
         </div>
     )

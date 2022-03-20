@@ -4,9 +4,9 @@ const Home = () => {
     const isAuthenticated = localStorage.getItem("isAuthenticated")
     return (
         <>
-        {!isAuthenticated? ( <div>
+            {!isAuthenticated ? (<div>
                 <h1>Welcome To Management System!</h1>
-            </div>):null }         
+            </div>) : null}
         </>
     );
 }
