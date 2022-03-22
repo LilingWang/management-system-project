@@ -2,6 +2,7 @@ import React from "react";
 import { Modal } from "antd";
 import { CloseCircleOutlined } from "@ant-design/icons";
 import { useSelector } from 'react-redux';
+import './index.css'
 
 const CartModal = ({
     titelText="",

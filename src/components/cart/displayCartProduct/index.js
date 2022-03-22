@@ -46,18 +46,20 @@ const DisplyCartProduct = () => {
             return (
                 <div>
                     <Row>
-                        <Col span={8}><img src={product.imgUrl} width="50px"></img></Col>
+                        <Col span={8}><img src={product.imgUrl} width="60px"></img></Col>
                         <Col span={8}>
-                            <div>{product.productName}</div>
+                            <div><h4>{product.productName}</h4></div>
                             <div style={{ display: 'inline-flex' }}>
                                 <Button type="text" class="value-button" id="decrease" onClick={handleMinus(index)} >-</Button>
                                 <p id="number" >{product.addOnitem} </p>
                                 <Button type="text" class="value-button" id="increase" onClick={handlePlus(index)} >+</Button>
                             </div>
+                            {product.item === product.addOnitem? (<p style={{marginTop:"-12px", marginBottom:"0px", color:"red"}}>Out of stock</p>):(<p style={{}}></p>)}
+                            
                         </Col>
                         <Col span={4}></Col>
                         <Col span={4}>
-                            <div>{price}</div>
+                            <div id="price">{price}</div>
                             <Button type="text"><p style={{ textDecoration: "underline" }} onClick={removeItemBtn(index)}>Remove</p></Button>
                         </Col>
                     </Row>
@@ -71,14 +73,14 @@ const DisplyCartProduct = () => {
             <div>
                 {productsList}
             </div>
-            <div>
+            <div id="applyDiv">
                 <label>Apply Discount Code</label>
                 <div style={{ display: 'inline-flex' }}>
                     <input></input>
-                    <Button onClick={handleDiscountBtn}>Apply</Button>
+                    <Button id="applyBtn" onClick={handleDiscountBtn}>Apply</Button>
                 </div>
             </div>
-            <div>
+            <div id="checkDiv">
                 <Row>
                     <Col span={18}>
                         <p>Subtotal</p>
@@ -90,12 +92,10 @@ const DisplyCartProduct = () => {
                         <p>${totalPrice.toFixed(2)}</p>
                         <p>${(totalPrice * 0.1).toFixed(2)}</p>
                         {showDiscount? (<p>-20</p>)  : null}
-                       {showDiscount? (<p> ${(totalPrice - 20).toFixed(2)}</p>)  : (<p>${totalPrice.toFixed(2)}</p>)}
-                      
-                        
+                       {showDiscount? (<p> ${(totalPrice - 20).toFixed(2)}</p>)  : (<p>${totalPrice.toFixed(2)}</p>)}               
                     </Col>
                 </Row>
-                <Button>Continue to checkout</Button>
+                <Button id="checkOutBtn">Continue to checkout</Button>
             </div>
         </div>
     )

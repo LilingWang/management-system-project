@@ -65,6 +65,7 @@ const LoginForm = ({
                 visible={visible}
                 width={593}
                 setVisible={setVisible}
+                style={{backgroundColor:"white"}}
             >
                 <UserNameInput
                     label="Email"

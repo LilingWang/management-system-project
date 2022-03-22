@@ -1,81 +1,63 @@
 import React, { useState } from "react";
-import { Row, Col, Select, Input, Upload, message, Button ,Modal} from 'antd';
-import { InboxOutlined } from '@ant-design/icons';
+import { Row, Col, Select, Input, Upload, message, Button, Modal,Image} from 'antd';
+import { CloseCircleOutlined } from '@ant-design/icons';
 import { addProduct } from "../../actions";
 import { useDispatch } from 'react-redux';
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const { Dragger } = Upload;
+//https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png
 const style = { float: 'left' };
-const marginText = { margin: '30px, 30px' };
+const marginText = { margin: '30px, 30px', backgroundColor:"white", padding:"20px" };
 const labelStyle = { float: 'left', marginTop: '30px' };
-const props = {
-    name: 'file',
-    multiple: true,
-    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-    onChange(info) {
-        const { status } = info.file;
-        if (status !== 'uploading') {
-            console.log(info.file, info.fileList);
-        }
-        if (status === 'done') {
-            message.success(`${info.file.name} file uploaded successfully.`);
-        } else if (status === 'error') {
-            message.error(`${info.file.name} file upload failed.`);
-        }
-    },
-    onDrop(e) {
-        console.log('Dropped files', e.dataTransfer.files);
-    },
-};
+
 const AddProducts = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
-
     const [productName, setProductName] = useState();
     const [textInput, setTextInput] = useState();
     const [categorySelect, setCategorySelect] = useState();
     const [price, setPrice] = useState();
     const dispatch = useDispatch();
+    const [item, setItem] = useState();
+    const [imgUrl, setimgUrl] = useState();
+    const [isImg, setIsImg] = useState(false);
 
     function handleChange(value) {
         setCategorySelect(value)
         console.log(`selected ${value}`);
     }
-      
-    const handleAddProduct=()=>{
-        const finalPrice = '$ ' + price
-        const product = {
-            imgUrl:'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-            price:finalPrice,
-            productName:productName,
-            productDescrip:textInput,
-            category:categorySelect,
-            addOnitem:0,
-            item:10,         
-        }
-        
-       addProduct(dispatch)(product);
-       setIsModalVisible(true)
 
-       
+    const handleAddProduct = () => {
+        const finalPrice = price
+        const product = {
+            imgUrl: imgUrl,
+            price: finalPrice,
+            productName: productName,
+            productDescrip: textInput,
+            category: categorySelect,
+            addOnitem: 0,
+            item: item,
+        }
+
+       addProduct(dispatch)(product);
+        setIsModalVisible(true)
     }
     let navigate = useNavigate();
     const handleOk = () => {
         setIsModalVisible(false);
-        
         navigate("../project");
-        //return (<Redirect to="project" />);
-        
+    };
+    const handleCancel = () => {
+        setIsModalVisible(false);
+        navigate("../project");
       };
+    const uploadBtn = () =>{
+        setIsImg(true)
+    };
 
     return (
         <div>
-
-        <Link to="project">hello</Link>
-        <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+            <Modal title="Successful add product!" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        
       </Modal>
             <Row>
                 <Col span={5}></Col>
@@ -86,13 +68,13 @@ const AddProducts = () => {
                             <label style={labelStyle}>
                                 Product name
                             </label>
-                            <Input 
+                            <Input
                                 onChange={(e) => setProductName(e.target.value)}
                             />
                             <label style={labelStyle}>
                                 Product description
                             </label>
-                            <Input.TextArea rows={4} className="textInput" onChange={(e)=>setTextInput(e.target.value)}/>
+                            <Input.TextArea rows={4} className="textInput" onChange={(e) => setTextInput(e.target.value)} />
                             <div>
                                 <Row>
                                     <Col span={12}>
@@ -104,49 +86,46 @@ const AddProducts = () => {
                                                 <Select.Option value="Category4">Category4</Select.Option>
                                             </Select>
                                         </div>
-
-
                                     </Col>
                                     <Col span={12}>
                                         <label style={labelStyle}>Price</label>
-                                        <Input className="priceInput" onChange={(e)=>setPrice(e.target.value)}/>
+                                        <Input className="priceInput" onChange={(e) => setPrice(e.target.value)} />
                                     </Col>
                                 </Row>
                             </div>
-                            <div style={{height:'50px'}}>
-                            <label style={labelStyle}>
-                                Add Image
-                            </label>
-                            </div>
-                            
                             <div>
-                            <Dragger {...props}>
-                                <p className="ant-upload-drag-icon">
-                                    <InboxOutlined />
-                                </p>
-                                <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                                <p className="ant-upload-hint">
-                                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                                    band files
-                                </p>
-                            </Dragger>
+                                <Row>
+                                    <Col span={6}>
+                                        <label style={labelStyle}>In Stock Quantity</label>
+                                        <Input className="priceInput" onChange={(e) => setItem(e.target.value)} />
+                                    </Col>
+                                    <Col span={1}/>
+                                    <Col span={17}>
+                                   
+                                        <label style={labelStyle}>Add Image Link</label>
+                                       
+                                        <Input className="priceInput" onChange={(e) => setimgUrl(e.target.value)} style={{width:"80%"}} placeholder="http://">
+                                        </Input>
+                                        <Button onClick={uploadBtn}>Upload</Button>
+                                    </Col>
+                                </Row>
                             </div>
+                            {isImg? (<div style={{marginTop:"50px"}}>
+                              <Image width={300} src={imgUrl}/>            
+                            </div>):(<div style={{marginTop:"50px", marginLeft:"20%", width:"300px", height:"200px", border:"1px dashed"}}>
+                                <p style={{marginTop:"25%"}}>image preview</p>
+                            </div>)}
                             
-                        <div style={{marginTop:'20px', float:'left'}}>
-                        <Button onClick={handleAddProduct}>Add product</Button>
-                        </div>
-                        
-                        
+                            <div style={{ marginTop: '30px'}}>
+                                <Button onClick={handleAddProduct} style={{backgroundColor:"blue", color:"white", fontWeight:"bold"}}>Add product</Button>
+                            </div>
                         </div>
                     </div>
-
                 </Col>
                 <Col span={5}></Col>
             </Row>
-
         </div>
     )
-
 }
 
 export default AddProducts;

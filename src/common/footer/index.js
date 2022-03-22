@@ -8,7 +8,7 @@ import Facebook from "../../svgs/facebook.svg";
 
 const Footer = () => {
   return (
-    <>
+    <div>
       <div className="footer_container">
         <span className="company_rights">{FOOTER_CONTENTS.COMPANY_RIGHTS}</span>
         <div className="logo_container">
@@ -22,7 +22,7 @@ const Footer = () => {
           <span className="help_text">{FOOTER_CONTENTS.HELP}</span>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

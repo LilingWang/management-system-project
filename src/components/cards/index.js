@@ -82,7 +82,6 @@ const Cards = () => {
                 searchByName.push(item);
             }
         })
-        console.log(searchByName,"121212");
         setCurrentList(searchByName);     
     }
 
@@ -95,13 +94,14 @@ const Cards = () => {
                 <Card
                     hoverable
                     style={{ width: 240 }}
-                    cover={<img alt="products" src={product.imgUrl} />}
+                    cover={<img alt="products" style={{height:"300px"}} src={product.imgUrl} />}
                 >
                     <Card.Meta description={price} title={product.productName} />
                     <div>
                         <Row>
                             <Col span={1}></Col>
                             <Col span={11}>
+                            {product.item === product.addOnitem? (<p style={{marginTop:"-12px", marginBottom:"0px", color:"red"}}>Out of stock</p>):(<p style={{}}></p>)}
                                 {product.addOnitem === 0 ? (<Button onClick={handleAddProductTab(index)}>Add</Button>)
                                     : (<div style={{ display: 'inline-flex' }}>
                                         <Button type="text" class="value-button" id="decrease" onClick={handleMinus(index)} >-</Button>
@@ -110,7 +110,8 @@ const Cards = () => {
                                     </div>)}
                             </Col>
                             <Col span={11}>
-                                {isAuthenticated ? (<Button onClick={goToImgDetailPage(index)}>Edit</Button>) : null}
+                            {product.item === product.addOnitem? (<p></p>):(<p style={{}}></p>)}
+                                {isAuthenticated ? (<Button style={{backgroundColor:"blue", color:"white", fontWeight:"bold"}} onClick={goToImgDetailPage(index)}>Edit</Button>) : null}
                             </Col>
                             <Col span={1}></Col>
                         </Row>
@@ -144,17 +145,15 @@ const Cards = () => {
                         <option value="Pricelowtohigh">Price: low to high</option>
                         <option value="Pricehightolow">Price: high to low</option>
                     </select>
-                    {isAuthenticated ? (<Button onClick={handleAddTab}>Add Product</Button>) : null}
+                    {isAuthenticated ? (<Button style={{backgroundColor:"blue", color:"white", fontWeight:"bold"}} onClick={handleAddTab}>Add Product</Button>) : null}
 
                 </div>
             </div>
-
             <div>
-                <div>
+                <div style={{backgroundColor:"white"}}>
                     <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>{productsList}</Row>
                 </div>
             </div> 
-
             <Pagination
                 className="product_pagination"
                 showQuickJumper

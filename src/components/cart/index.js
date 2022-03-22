@@ -27,7 +27,7 @@ const Cart = ({
                 width={400}
                 setCartVisible={setCartVisible}
             >
-                <DisplyCartProduct />
+            {totalItem? (<DisplyCartProduct />):(<p>Shopping cart is empty!</p>)}               
             </CartModal>
         </div>
     )

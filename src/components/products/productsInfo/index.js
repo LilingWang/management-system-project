@@ -4,7 +4,7 @@ import { initProducts } from '../../../actions/index';
 import Cards from '../../cards';
 import { Divider, Row, Col, Button } from "antd";
 
-const style = { margin: '30px 30px' };
+const style = { margin: '30px 30px', marginBottom:'50px', height:'1100px'};
 
 const ProductInfo = () => {
     console.log("hello")
@@ -14,19 +14,15 @@ const ProductInfo = () => {
     }, []);
 
     return (
-
         <div style={style}>
             <div>
                 <Row>
                     <Col span={23}>
                         <Divider orientation="left">Products</Divider>
                     </Col>
-
                 </Row>
             </div>
-
             <Cards />
-
         </div>
     )
 }

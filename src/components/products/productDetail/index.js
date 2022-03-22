@@ -6,7 +6,6 @@ import { getProductsInfo, minusProductToCart,addProductToCart} from "../../../ac
 import {addProductToList} from "../../../actions/cartProducts/index"
 import "./index.css";
 
-
 const style = { margin: '30px 30px' };
 const ProductDetail = ({
     productIndex = "",
@@ -38,7 +37,6 @@ const ProductDetail = ({
        // console.log(products.reducer, ".....ewrewjjdfjds")
     }
 
-
     return (
         <div>
         <div style={style}>
@@ -52,12 +50,15 @@ const ProductDetail = ({
             <Col span={1}></Col>
             <Col span={7}>
                 <div>
-                    <h2>{productDetail.cartReducer.category}</h2>
-                    <h1>{productDetail.cartReducer.productName}</h1>
-                    <h1>{productDetail.cartReducer.price}</h1>
-                    <h2>{productDetail.cartReducer.productDescrip}</h2>
+                    <h3 style={{color:"grey"}}>{productDetail.cartReducer.category}</h3>
+                    <h1 style={{color:"grey"}}>{productDetail.cartReducer.productName}</h1>
+                    <div style={{display:"inline-flex"}}>
+                    <h1>${productDetail.cartReducer.price}</h1>
+                    {productDetail.cartReducer.item === productDetail.cartReducer.addOnitem? (<Button style={{backgroundColor:"#f7d6d6", color:"red", marginLeft:"10px", marginTop:"8px"}}>Out of stock</Button>):null }
+                    </div>
+                    
+                    <h2 style={{color:"grey"}}>{productDetail.cartReducer.productDescrip}</h2>
                 </div>
-
                 <div>
                 {productDetail.cartReducer.addOnitem === 0 ? (<Button onClick={handleAddProductTab(productIndex)}>Add</Button>)
                                 : (<div style={{ display: 'inline-flex' }}>
@@ -77,48 +78,3 @@ const ProductDetail = ({
 }
 
 export default ProductDetail;
-
-/*
-    const dispatch = useDispatch();
-    console.log(";;;;;", index);
-    getProductsInfo(dispatch)(Number(index));
-    const productDetail = useSelector((state) => state);
-    console.log("test in detail page", productDetail.reducer)
-
-    return (
-        <div>
-            <ProductDetailModal
-                productDetailVisible={productDetailVisible}
-                width={400}
-                setProductDetailVisible={setProductDetailVisible}
-            >
-            <ProductDetail/>
-
-            </ProductDetailModal>
-        </div>/*
-        <div>
-            <div style={style}>
-            <Divider orientation="left">Products Detail</Divider>
-            <div>
-            <Row>
-                <Col span={7}>
-                    <Image width={400}
-                    src={productDetail.reducer.imgUrl}></Image>
-                </Col>
-                <Col span={1}></Col>
-                <Col span={7}>
-                    <div>
-                        <h2>{productDetail.reducer.category}</h2>
-                        <h1>{productDetail.reducer.productName}</h1>
-                        <h1>{productDetail.reducer.price}</h1>
-                        <h2>{productDetail.reducer.productDescrip}</h2>
-                    </div>
-
-                    <Button>Add To Card</Button>
-                </Col>
-            </Row>
-
-            </div>
-
-        </div>
-        </div>*/

@@ -1,0 +1,16 @@
+.ant-modal-footer {
+    display: none
+}
+
+.ant-modal-header {
+    font-weight: bold;
+}
+
+.ant-modal-title {
+    color:rgb(75, 74, 74)
+}
+
+.anticon-close-circle {
+   color:rgb(138, 135, 135);
+   font-weight: bold;
+}
