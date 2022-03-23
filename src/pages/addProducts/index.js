@@ -21,8 +21,29 @@ const AddProducts = () => {
     const [imgUrl, setimgUrl] = useState();
     const [isImg, setIsImg] = useState(false);
     const { index } = useParams();
+   
 
     console.log(index)
+
+    getProductsInfo(dispatch)(Number(index));
+    const productDetail = useSelector((state) => state);
+
+    console.log("product detail", productDetail.cartReducer)
+    const [productName2, setProductName2] = useState();
+    const [textInput2, setTextInput2] = useState();
+    const [categorySelect2, setCategorySelect2] = useState();
+    const [price2, setPrice2] = useState();
+    const [item2, setItem2] = useState();
+    const [imgUrl2, setimgUrl2] = useState();
+
+    useEffect(() => {
+         setProductName2(productDetail.cartReducer.productName);
+         setTextInput2(productDetail.cartReducer.productDescrip);
+         setCategorySelect2(productDetail.cartReducer.category);
+         setPrice2(productDetail.cartReducer.price);
+         setItem2(productDetail.cartReducer.item);
+         setimgUrl2(productDetail.cartReducer.imgUrl)
+      }, [productDetail]);
 
     function handleChange(value) {
         setCategorySelect(value)
@@ -72,18 +93,23 @@ const AddProducts = () => {
                 <Col span={5}></Col>
                 <Col span={14}>
                     <div style={style}>
-                        <h1>{Number(index)? ('Edit Product'):('Create Product')}</h1>
+                        <h1>{(Number(index) >= 0)? ('Edit Product'):('Create Product')}</h1>
                         <div style={marginText}>
                             <label style={labelStyle}>
                                 Product name
                             </label>
-                            <Input
-                                onChange={(e) => setProductName(e.target.value)} 
-                            />
+                            {(Number(index) >= 0)? (<Input
+                                onChange={(e) => setProductName2(e.target.value)} value={productName2}
+                            />):(<Input
+                                onChange={(e) => setProductName(e.target.value)}
+                            />)}
+                            
                             <label style={labelStyle}>
                                 Product description
                             </label>
-                            <Input.TextArea rows={4} className="textInput" onChange={(e) => setTextInput(e.target.value)} />
+                            {(Number(index) >= 0)? (<Input.TextArea rows={4} className="textInput" onChange={(e) => setTextInput2(e.target.value)} value={textInput2} />)
+                            :(<Input.TextArea rows={4} className="textInput" onChange={(e) => setTextInput(e.target.value)} />)}
+                            
                             <div>
                                 <Row>
                                     <Col span={12}>
@@ -98,7 +124,10 @@ const AddProducts = () => {
                                     </Col>
                                     <Col span={12}>
                                         <label style={labelStyle}>Price</label>
-                                        <Input className="priceInput" onChange={(e) => setPrice(e.target.value)} />
+                                        {(Number(index) >= 0)? (<Input className="priceInput" onChange={(e) => setPrice(e.target.value)} value={price2} />)
+                            :(<Input className="priceInput" onChange={(e) => setPrice(e.target.value)} />)}
+                            
+                                        
                                     </Col>
                                 </Row>
                             </div>
@@ -106,15 +135,21 @@ const AddProducts = () => {
                                 <Row>
                                     <Col span={6}>
                                         <label style={labelStyle}>In Stock Quantity</label>
-                                        <Input className="priceInput" onChange={(e) => setItem(e.target.value)} />
+                                        {(Number(index) >= 0)? ( <Input className="priceInput" onChange={(e) => setItem(e.target.value)} value={item2}/>)
+                            :( <Input className="priceInput" onChange={(e) => setItem(e.target.value)} />)}     
+                                       
                                     </Col>
                                     <Col span={1}/>
                                     <Col span={17}>
                                    
                                         <label style={labelStyle}>Add Image Link</label>
+                                        
+                                        {(Number(index) >= 0)? ( <Input className="priceInput" onChange={(e) => setimgUrl(e.target.value)} style={{width:"80%"}} placeholder="http://" value={imgUrl2}>
+                                        </Input>)
+                            :( <Input className="priceInput" onChange={(e) => setimgUrl(e.target.value)} style={{width:"80%"}} placeholder="http://">
+                                        </Input>)}     
                                        
-                                        <Input className="priceInput" onChange={(e) => setimgUrl(e.target.value)} style={{width:"80%"}} placeholder="http://">
-                                        </Input>
+                                        
                                         <Button onClick={uploadBtn}>Upload</Button>
                                     </Col>
                                 </Row>
@@ -124,7 +159,7 @@ const AddProducts = () => {
                             </div>):(<div style={{marginTop:"50px", marginLeft:"20%", width:"300px", height:"200px", border:"1px dashed"}}>
                                 <p style={{marginTop:"25%"}}>image preview</p>
                             </div>)}
-                            {Number(index)? (
+                            {(Number(index) >= 0)? (
                                 <div style={{ marginTop: '30px'}}>
                                 <Button onClick={handleAddProduct} style={{backgroundColor:"blue", color:"white", fontWeight:"bold"}}>Edit product</Button>
                                 <Button onClick={handleDelProduct} style={{backgroundColor:"blue", color:"white", fontWeight:"bold"}}>Delete product</Button>
