@@ -24,10 +24,12 @@ const SingupForm = ({
     const setLoginTab = () =>{
         setVisible(true);
         setSignupVisible(false);
+        seterrorMessage("");
        
     }
 
     const handleSignupTab = () => {
+        seterrorMessage("");
         const pro = {
             email:email,
             passWord:passWord

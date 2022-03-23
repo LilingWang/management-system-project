@@ -57,7 +57,7 @@ const Cards = () => {
         addProductToList(dispatch)(index);
     }
     const handleAddTab = () => {
-        window.location.href = "http://localhost:3000/addProducts";
+        window.location.href = "http://localhost:3000/addProducts/" + "a";
     }
 
     const onSelectProductFilter = (e) => {
@@ -150,7 +150,7 @@ const Cards = () => {
                 </div>
             </div>
             <div>
-                <div style={{backgroundColor:"white"}}>
+                <div style={{backgroundColor:"white", padding:"20px"}}>
                     <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>{productsList}</Row>
                 </div>
             </div> 

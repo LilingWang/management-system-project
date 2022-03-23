@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Select, Input, Upload, message, Button, Modal,Image} from 'antd';
 import { CloseCircleOutlined } from '@ant-design/icons';
-import { addProduct } from "../../actions";
-import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from "react-router-dom";
+import { addProduct,getProductsInfo,delItem} from "../../actions/index";
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams, useNavigate } from "react-router-dom";
 
 //https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png
 const style = { float: 'left' };
@@ -20,6 +20,9 @@ const AddProducts = () => {
     const [item, setItem] = useState();
     const [imgUrl, setimgUrl] = useState();
     const [isImg, setIsImg] = useState(false);
+    const { index } = useParams();
+
+    console.log(index)
 
     function handleChange(value) {
         setCategorySelect(value)
@@ -41,6 +44,12 @@ const AddProducts = () => {
        addProduct(dispatch)(product);
         setIsModalVisible(true)
     }
+
+    const handleDelProduct = () =>{
+        delItem(dispatch)(Number(index));
+        setIsModalVisible(true)
+    }
+
     let navigate = useNavigate();
     const handleOk = () => {
         setIsModalVisible(false);
@@ -63,13 +72,13 @@ const AddProducts = () => {
                 <Col span={5}></Col>
                 <Col span={14}>
                     <div style={style}>
-                        <h1>Create Product</h1>
+                        <h1>{Number(index)? ('Edit Product'):('Create Product')}</h1>
                         <div style={marginText}>
                             <label style={labelStyle}>
                                 Product name
                             </label>
                             <Input
-                                onChange={(e) => setProductName(e.target.value)}
+                                onChange={(e) => setProductName(e.target.value)} 
                             />
                             <label style={labelStyle}>
                                 Product description
@@ -115,10 +124,17 @@ const AddProducts = () => {
                             </div>):(<div style={{marginTop:"50px", marginLeft:"20%", width:"300px", height:"200px", border:"1px dashed"}}>
                                 <p style={{marginTop:"25%"}}>image preview</p>
                             </div>)}
-                            
-                            <div style={{ marginTop: '30px'}}>
+                            {Number(index)? (
+                                <div style={{ marginTop: '30px'}}>
+                                <Button onClick={handleAddProduct} style={{backgroundColor:"blue", color:"white", fontWeight:"bold"}}>Edit product</Button>
+                                <Button onClick={handleDelProduct} style={{backgroundColor:"blue", color:"white", fontWeight:"bold"}}>Delete product</Button>
+                            </div>
+                            ):(
+                                <div style={{ marginTop: '30px'}}>
                                 <Button onClick={handleAddProduct} style={{backgroundColor:"blue", color:"white", fontWeight:"bold"}}>Add product</Button>
                             </div>
+                            )}
+                            
                         </div>
                     </div>
                 </Col>

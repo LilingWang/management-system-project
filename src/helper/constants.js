@@ -9,3 +9,4 @@ export const ADDTOCART = 'ADDTOCART';
 export const ADDTOCARTLIST ='ADDTOCARTLIST';
 export const MINUSTOCART ='MINUSTOCART';
 export const REMOVEITEM ='REMOVEITEM';
+export const DELITEM ='DELITEM';

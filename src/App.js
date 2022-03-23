@@ -19,7 +19,7 @@ function App() {
         <Routes>
           <Route path="project" element={<Project />} />
           <Route path="products_detail/:index" element={<ProductsDetail />} />
-          <Route path="addProducts" element={<AddProducts />} />
+          <Route path="addProducts/:index" element={<AddProducts />} />
           <Route path="editProduct/:index" element={<EditProduct />} />
         </Routes>
       </div>

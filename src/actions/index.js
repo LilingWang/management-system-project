@@ -1,4 +1,4 @@
-import { INIT,GETINFO, ADD,ADDTOCART,MINUSTOCART,REMOVEITEM } from "../helper/constants";
+import { INIT,GETINFO, ADD,ADDTOCART,MINUSTOCART,REMOVEITEM ,DELITEM} from "../helper/constants";
 import {ProductsApi} from "../api/productsAPI";
 
 export const initProducts = (dispatch) => async(products) =>{
@@ -39,12 +39,8 @@ export const addProduct = (dispatch)=> (value)=>{
     .then(()=>{
         dispatch({
             type:ADD,
-            payload: {
-                content:value,
-            }
-
-        });
-        
+            payload: value
+        });    
     })
     .catch((e)=>{
         console.log(e)
@@ -92,6 +88,20 @@ export const removeItemFromCart = (dispatch) => async(index) =>{
         dispatch({
             type:REMOVEITEM,
             payload:result.products,
+        })
+    }catch(e){
+        console.log(e);
+    }
+}
+
+export const delItem = (dispatch) => async(index) =>{
+    
+    try{
+        const result = await ProductsApi.delItem(index);
+        console.log(result,"test del item")
+        dispatch({
+            type:DELITEM,
+            payload:index,
         })
     }catch(e){
         console.log(e);

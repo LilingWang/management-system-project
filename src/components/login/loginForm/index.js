@@ -21,7 +21,9 @@ const LoginForm = ({
 
     const setSignupTab = () =>{
         setSignupVisible(true);
-        setVisible(false);     
+        setVisible(false);   
+        setUserErrorMessage("");
+        seterrorMessage("");  
     }
 
     const handleSubmit = () => {
@@ -65,7 +67,6 @@ const LoginForm = ({
                 visible={visible}
                 width={593}
                 setVisible={setVisible}
-                style={{backgroundColor:"white"}}
             >
                 <UserNameInput
                     label="Email"

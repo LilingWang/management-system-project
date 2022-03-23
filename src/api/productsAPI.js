@@ -69,7 +69,7 @@ export const ProductsApi = {
                     return;
                 }
                 this.products.unshift(product.content);
-                resolve({ addProduct: 'succeed' });
+                resolve({ products: this.products});
             }, 500);
         });
     },
@@ -126,6 +126,27 @@ export const ProductsApi = {
                 resolve({ products: this.products });
             }, 500);
         })
-    }
+    },
 
-}
+    delItem: async function (index) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            if (
+              !Number.isInteger(index) ||
+              index < 0 ||
+              index >= this.products.length
+            ) {
+              reject({ error: 'index is not valid !' });
+              return;
+            }
+    
+            this.products = [
+                ...this.products.slice(0, index),
+            ...this.products.slice(index + 1),
+            ];
+            resolve({ products: this.products });
+          }, 500);
+        });
+      },
+
+};
