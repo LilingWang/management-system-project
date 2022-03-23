@@ -1,4 +1,4 @@
-import { INIT,GETINFO, ADD,ADDTOCART,MINUSTOCART,REMOVEITEM ,DELITEM} from "../helper/constants";
+import { INIT,GETINFO, ADD,ADDTOCART,MINUSTOCART,REMOVEITEM ,DELITEM,MODITEM} from "../helper/constants";
 import {ProductsApi} from "../api/productsAPI";
 
 export const initProducts = (dispatch) => async(products) =>{
@@ -45,6 +45,20 @@ export const addProduct = (dispatch)=> (value)=>{
     .catch((e)=>{
         console.log(e)
     });    
+}
+
+export const modItem = (dispatch) => async(value) =>{
+    
+    try{
+        const result = await ProductsApi.modProduct(value);
+        console.log(result,"test mod  del item")
+        dispatch({
+            type:MODITEM,
+            payload:value,
+        })
+    }catch(e){
+        console.log(e);
+    }
 }
 
 export const addProductToCart = (dispatch) => async(index)=>{

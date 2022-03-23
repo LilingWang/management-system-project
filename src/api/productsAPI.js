@@ -69,7 +69,21 @@ export const ProductsApi = {
                     return;
                 }
                 this.products.unshift(product.content);
-                resolve({ products: this.products});
+                resolve({ products: this.products });
+            }, 500);
+        });
+    },
+
+    modProduct: async function (product) {
+        console.log("modproduct==---", product)
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (!product.value || !product.value) {
+                    reject({ error: 'content is empty!' });
+                    return;
+                }
+                this.products[product.index] = product.value;
+                resolve({ products: this.products });
             }, 500);
         });
     },
@@ -113,15 +127,15 @@ export const ProductsApi = {
     },
 
     removeItem: async function (index) {
-        return new Promise((resolve, reject) =>{
+        return new Promise((resolve, reject) => {
             setTimeout(() => {
                 if (!Number.isInteger(index) ||
                     index < 0 ||
                     index >= this.products.length) {
                     reject({ error: 'index is not valid!' });
                     return;
-                }             
-                    this.products[index].addOnitem = 0;
+                }
+                this.products[index].addOnitem = 0;
                 //console.log(this.products, "'''....")
                 resolve({ products: this.products });
             }, 500);
@@ -130,23 +144,23 @@ export const ProductsApi = {
 
     delItem: async function (index) {
         return new Promise((resolve, reject) => {
-          setTimeout(() => {
-            if (
-              !Number.isInteger(index) ||
-              index < 0 ||
-              index >= this.products.length
-            ) {
-              reject({ error: 'index is not valid !' });
-              return;
-            }
-    
-            this.products = [
-                ...this.products.slice(0, index),
-            ...this.products.slice(index + 1),
-            ];
-            resolve({ products: this.products });
-          }, 500);
+            setTimeout(() => {
+                if (
+                    !Number.isInteger(index) ||
+                    index < 0 ||
+                    index >= this.products.length
+                ) {
+                    reject({ error: 'index is not valid !' });
+                    return;
+                }
+
+                this.products = [
+                    ...this.products.slice(0, index),
+                    ...this.products.slice(index + 1),
+                ];
+                resolve({ products: this.products });
+            }, 500);
         });
-      },
+    },
 
 };

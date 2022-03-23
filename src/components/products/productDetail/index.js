@@ -69,7 +69,7 @@ const ProductDetail = ({
                                         <Button type="text" class="value-button" id="increase" onClick={handlePlus(productIndex)} >+</Button>
                                     </div>)}
 
-                                <Button onClick={handleEditBtn}>Edit</Button>
+                                <Button style={{backgroundColor:'blue', color:'white', fontWeight:'bold'}} onClick={handleEditBtn}>Edit</Button>
                             </div>
 
                         </Col>

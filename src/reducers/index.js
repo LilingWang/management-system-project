@@ -1,4 +1,4 @@
-import { INIT, REMOVEITEM, ADD, ADDTOCART, MINUSTOCART, DELITEM } from "../helper/constants";
+import { INIT, REMOVEITEM, ADD, ADDTOCART, MINUSTOCART, DELITEM, MODITEM} from "../helper/constants";
 
 const products = [];
 export const reducer = (state = products, { type, payload }) => {
@@ -17,6 +17,10 @@ export const reducer = (state = products, { type, payload }) => {
             return [...state, { ...payload }];
         case DELITEM:
             return [...state.slice(0,payload), ...state.slice(payload+1)];
+            case MODITEM:
+                const modState = [...state]
+                modState[payload.value.index] = payload.value.value;
+            return modState;
         default:
             return state;
     }
